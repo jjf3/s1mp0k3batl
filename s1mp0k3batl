@@ -1,0 +1,37 @@
+import random
+
+class Pokemon:
+    def __init__(self, name, health, attack_power):
+        self.name = name
+        self.health = health
+        self.attack_power = attack_power
+
+    def attack(self, target):
+        damage = random.randint(1, self.attack_power)
+        target.health -= damage
+        print(f"{self.name} attacks {target.name} and deals {damage} damage.")
+
+# Create two Pokémon
+pokemon1 = Pokemon("Charizard", 100, 50)
+pokemon2 = Pokemon("Blastoise", 120, 40)
+
+# Perform the battle until one Pokémon faints
+while pokemon1.health > 0 and pokemon2.health > 0:
+    # Randomly select the attacking Pokémon
+    attacker = random.choice([pokemon1, pokemon2])
+    # Select the other Pokémon as the target
+    target = pokemon2 if attacker == pokemon1 else pokemon1
+
+    # Attack the target
+    attacker.attack(target)
+
+    # Print the current health of each Pokémon
+    print(f"{pokemon1.name}: {pokemon1.health} HP")
+    print(f"{pokemon2.name}: {pokemon2.health} HP")
+    print()
+
+# Determine the winner
+if pokemon1.health > 0:
+    print(f"{pokemon1.name} wins the battle!")
+else:
+    print(f"{pokemon2.name} wins the battle!")
